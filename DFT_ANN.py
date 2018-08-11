@@ -19,7 +19,7 @@ X = np.hstack([sig.real, sig.imag])
 Y = np.hstack([F.real, F.imag])
 
 # Create model with no hidden layers, same number of outputs as inputs.
-# No bias needed.  No activation function, since FFT is linear.
+# No bias needed.  No activation function, since DFT is linear.
 model = Sequential([Dense(N*2, input_dim=N*2, use_bias=False)])
 model.compile(loss='mean_squared_error', optimizer='adam')
 model.fit(X, Y, epochs=100, batch_size=100)
