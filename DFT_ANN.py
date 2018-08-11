@@ -4,7 +4,6 @@ Train a neural network to implement the discrete Fourier transform
 from keras.models import Sequential
 from keras.layers import Dense
 import numpy as np
-from scipy import fftpack
 import matplotlib.pyplot as plt
 
 N = 32
@@ -12,7 +11,7 @@ batch = 10000
 
 # Generate random input data and desired output data
 sig = np.random.randn(batch, N) + 1j*np.random.randn(batch, N)
-F = fftpack.fft(sig, axis=-1)
+F = np.fft.fft(sig, axis=-1)
 
 # First half of inputs/outputs is real part, second half is imaginary part
 X = np.hstack([sig.real, sig.imag])
@@ -25,9 +24,18 @@ model.compile(loss='mean_squared_error', optimizer='adam')
 model.fit(X, Y, epochs=100, batch_size=100)
 
 # Confirm that it works
-data = np.arange(32)
-pre = model.predict(np.array([np.concatenate((data.real, data.imag))]))[0]
-ANN = pre[:32] + 1j*pre[32:]
+data = np.arange(N)
+
+
+def ANN_DFT(x):
+    if len(x) != N:
+        raise ValueError(f'Input must be length {N}')
+    pred = model.predict(np.hstack([x.real, x.imag])[np.newaxis])[0]
+    result = pred[:N] + 1j*pred[N:]
+    return result
+
+
+ANN = ANN_DFT(data)
 FFT = np.fft.fft(data)
 print(f'ANN matches FFT: {np.allclose(ANN, FFT)}')
 
