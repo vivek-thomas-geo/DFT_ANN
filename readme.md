@@ -1,4 +1,4 @@
-My second neural network experiment ([first was FIR filter](https://gist.github.com/endolith/1de9a8700f72b97974a2e93b0fba316a)). 
+My third neural network experiment ([second was FIR filter](https://gist.github.com/endolith/1de9a8700f72b97974a2e93b0fba316a)). 
 DFT output is just a linear combination of inputs, so it should be 
 implementable by a single layer with no activation function.
 
