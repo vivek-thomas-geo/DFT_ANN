@@ -1,8 +1,8 @@
 """
 Train a neural network to implement the discrete Fourier transform
 """
-from keras.models import Sequential
-from keras.layers import Dense
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
 import numpy as np
 import matplotlib.pyplot as plt
 
